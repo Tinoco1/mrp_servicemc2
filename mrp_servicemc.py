@@ -117,6 +117,15 @@ class mrp_servicemc(osv.osv):
             cr, uid, [('fees_lines', 'in', ids)], context=context)
 
     _columns = {
+        'facproducto': fields.many2one('product.product','Producto'),   
+        'facpreciounitario': fields.float('Precio unitario', help = 'Precio unitario',  required=True), 
+        'facimpuestos': fields.many2many('account.tax', 'repair_operation_line_tax', 'repair_operation_line_id', 'tax_id', 'Impuesto'),
+        'facafacturar':fields.boolean('A facturar'),
+        'facsubtotal':fields.float('Subtotal'),
+        'total': fields.float('Total'),
+        'faccantidad': fields.float('Cantidad',help = 'Cantidad',required=True),
+        'noeconomicomc':fields.char('Numero Economico',size=24),
+        'noseriemc':fields.char('Numero de Serie',size=24),
         'name': fields.char('servicemc Reference',size=24, required=True, states={'confirmed':[('readonly',True)]}),
         'product_id': fields.many2one('product.product', string='Product to give service', required=True, readonly=True, states={'draft':[('readonly',False)]}),
         'partner_id' : fields.many2one('res.partner', 'Partner', select=True, help='Choose partner for whom the order will be invoiced and delivered.', states={'confirmed':[('readonly',True)]}),
@@ -577,6 +586,21 @@ class mrp_servicemc(osv.osv):
             else:
                 self.write(cr, uid, [servicemc.id], {'state': 'done'})
         return res
+
+class actividades_lines(osv.osv):
+    _name = 'actividades.lines'
+    _description = 'tareas'
+    _columns = {
+        'facproducto': fields.many2one('product.product','Producto'),   
+        'faccantidad': fields.float('Cantidad',help = 'Cantidad',required=True),        
+        'facpreciounitario': fields.float('Precio unitario', help = 'Precio unitario',  required=True), 
+        'facimpuestos': fields.many2many('account.tax', 'repair_operation_line_tax', 'repair_operation_line_id', 'tax_id', 'Impuesto'),
+        'facafacturar':fields.boolean('A facturar'),
+        'facsubtotal':fields.float('Subtotal'),
+        'total': fields.float('Total')        
+        }
+   
+actividades_lines()
 
 
 class ProductChangeMixin(object):

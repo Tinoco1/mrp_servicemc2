@@ -38,7 +38,7 @@
                    <button name="cancel" states="draft" string="Cancel servicio"/>
                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
                </header>
-               <sheet string="Orden de Servicio">e
+               <sheet string="Orden de Servicio">
                     <h1>
                         Orden de Servicio <field name="name" class="oe_inline"/>
                     </h1>
@@ -193,6 +193,7 @@
                      <page string="Orden de Producion">
 <!--==========================VISTA LIBRO DENTRO PRINCIPAL=========================-->
                             <notebook>
+
                                   <page string="Realizaron Actividades">
                                     <form string="Responsable" version="7.0">
                                     <group col="4">
@@ -203,7 +204,11 @@
                                     <group>
                                         <field name="produccion_notas" />
                                     </group>
-                                    </form>   
+
+                                    </form> 
+
+
+
                                 </page>
                                 <page string="Personal que Realizo la Inspeccion">
                                     <form string="resposable calidad" version="7.0">
@@ -219,7 +224,13 @@
                                         <field name="calidad_notas"/>
                                     </group>
                                     </form>
+                                    <tree editable="buttom">
+                                        <field name="faccantidad"/>
+                               
+                                   </tree>
+
                                 </page>
+
                             </notebook>             
 <!--======================FIN VISTA LIBRO DENTRO PRINCIPAL=====================-->
                         </page>    
